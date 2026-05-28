@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 
 function App() {
-  const [tripType, setTripType] = useState("oneway");
+  const [tripType, setTripType] = useState("One Way");
 
   const [source, setSource] = useState("");
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
 
   const [searched, setSearched] = useState(false);
+  const [flightFound, setFlightFound] = useState(false);
+
   const [bookingPage, setBookingPage] = useState(false);
   const [confirmationPage, setConfirmationPage] = useState(false);
-
-  const [flightFound, setFlightFound] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -20,31 +20,30 @@ function App() {
   const [errors, setErrors] = useState({});
 
   const searchFlights = () => {
+    if (!source || !destination || !date) {
+      alert("Please fill all fields");
+      return;
+    }
+
     setSearched(true);
 
-    if (
-      source.toLowerCase() === "mumbai" &&
-      destination.toLowerCase() === "delhi"
-    ) {
-      setFlightFound(true);
-    } else {
-      setFlightFound(false);
-    }
+    // Always show flights after valid search
+    setFlightFound(true);
   };
 
   const validate = () => {
     let temp = {};
 
-    if (name.trim() === "") {
+    if (!name.trim()) {
       temp.name = "Name is required";
     }
 
-    if (!email.includes("@")) {
-      temp.email = "Valid email required";
+    if (!email.trim()) {
+      temp.email = "Email is required";
     }
 
-    if (phone.length < 10) {
-      temp.phone = "Phone number invalid";
+    if (!phone.trim()) {
+      temp.phone = "Phone is required";
     }
 
     setErrors(temp);
@@ -58,18 +57,19 @@ function App() {
     }
   };
 
+  // CONFIRMATION PAGE
   if (confirmationPage) {
     return (
       <div className="container">
-        <h1>Booking Confirmed</h1>
+        <h1>Booking Confirmation</h1>
 
         <ul>
           <li>Name: {name}</li>
           <li>Email: {email}</li>
           <li>Phone: {phone}</li>
-          <li>Trip: {tripType}</li>
-          <li>From: {source}</li>
-          <li>To: {destination}</li>
+          <li>Trip Type: {tripType}</li>
+          <li>Source: {source}</li>
+          <li>Destination: {destination}</li>
           <li>Date: {date}</li>
         </ul>
 
@@ -78,18 +78,19 @@ function App() {
             window.location.reload();
           }}
         >
-          Go Home
+          Return Home
         </button>
       </div>
     );
   }
 
+  // BOOKING PAGE
   if (bookingPage) {
     return (
       <div className="container">
         <h1>Flight Booking App</h1>
 
-        <h2>Enter Passenger Details</h2>
+        <h2>Passenger Details</h2>
 
         <input
           type="text"
@@ -123,17 +124,22 @@ function App() {
     );
   }
 
+  // SEARCH PAGE
   return (
     <div className="container">
       <h1>Welcome to Flight Booking App</h1>
+
+      <ul>
+        <li>Search Flights</li>
+      </ul>
 
       <div>
         <label>
           <input
             type="radio"
             name="trip"
-            value="oneway"
-            checked={tripType === "oneway"}
+            value="One Way"
+            checked={tripType === "One Way"}
             onChange={(e) => setTripType(e.target.value)}
           />
           One Way
@@ -143,8 +149,8 @@ function App() {
           <input
             type="radio"
             name="trip"
-            value="roundtrip"
-            checked={tripType === "roundtrip"}
+            value="Round Trip"
+            checked={tripType === "Round Trip"}
             onChange={(e) => setTripType(e.target.value)}
           />
           Round Trip
@@ -182,10 +188,10 @@ function App() {
       {flightFound && (
         <div>
           <ul>
-            <li>Flight Name: Phoenix Airlines</li>
-            <li>Source: {source}</li>
-            <li>Destination: {destination}</li>
-            <li>Trip Type: {tripType}</li>
+            <li>{source}</li>
+            <li>{destination}</li>
+            <li>{tripType}</li>
+            <li>Phoenix Airlines</li>
           </ul>
 
           <button className="book-flight" onClick={() => setBookingPage(true)}>
