@@ -13,7 +13,6 @@ body {
 }
 
 input,
-select,
 button {
   width: 100%;
   padding: 10px;
@@ -25,4 +24,12 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+}
+
+label {
+  margin-right: 15px;
+}
+
+ul {
+  padding-left: 20px;
 }

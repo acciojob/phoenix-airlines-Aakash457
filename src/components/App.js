@@ -8,9 +8,10 @@ function App() {
   const [date, setDate] = useState("");
 
   const [searched, setSearched] = useState(false);
-  const [flightFound, setFlightFound] = useState(false);
+  const [bookingPage, setBookingPage] = useState(false);
+  const [confirmationPage, setConfirmationPage] = useState(false);
 
-  const [showBooking, setShowBooking] = useState(false);
+  const [flightFound, setFlightFound] = useState(false);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -18,14 +19,7 @@ function App() {
 
   const [errors, setErrors] = useState({});
 
-  const [confirmed, setConfirmed] = useState(false);
-
   const searchFlights = () => {
-    if (!source || !destination || !date) {
-      alert("Please fill all fields");
-      return;
-    }
-
     setSearched(true);
 
     if (
@@ -38,11 +32,11 @@ function App() {
     }
   };
 
-  const validateForm = () => {
+  const validate = () => {
     let temp = {};
 
-    if (!name) {
-      temp.name = "Name required";
+    if (name.trim() === "") {
+      temp.name = "Name is required";
     }
 
     if (!email.includes("@")) {
@@ -50,7 +44,7 @@ function App() {
     }
 
     if (phone.length < 10) {
-      temp.phone = "Valid phone required";
+      temp.phone = "Phone number invalid";
     }
 
     setErrors(temp);
@@ -58,25 +52,26 @@ function App() {
     return Object.keys(temp).length === 0;
   };
 
-  const confirmBooking = () => {
-    if (validateForm()) {
-      setConfirmed(true);
+  const handleBooking = () => {
+    if (validate()) {
+      setConfirmationPage(true);
     }
   };
 
-  if (confirmed) {
+  if (confirmationPage) {
     return (
       <div className="container">
         <h1>Booking Confirmed</h1>
 
-        <p>Name: {name}</p>
-        <p>Email: {email}</p>
-        <p>Phone: {phone}</p>
-
-        <p>Trip Type: {tripType}</p>
-        <p>From: {source}</p>
-        <p>To: {destination}</p>
-        <p>Date: {date}</p>
+        <ul>
+          <li>Name: {name}</li>
+          <li>Email: {email}</li>
+          <li>Phone: {phone}</li>
+          <li>Trip: {tripType}</li>
+          <li>From: {source}</li>
+          <li>To: {destination}</li>
+          <li>Date: {date}</li>
+        </ul>
 
         <button
           onClick={() => {
@@ -89,12 +84,12 @@ function App() {
     );
   }
 
-  if (showBooking) {
+  if (bookingPage) {
     return (
       <div className="container">
         <h1>Flight Booking App</h1>
 
-        <h2>Passenger Details</h2>
+        <h2>Enter Passenger Details</h2>
 
         <input
           type="text"
@@ -123,24 +118,38 @@ function App() {
 
         {errors.phone && <p>{errors.phone}</p>}
 
-        <button onClick={confirmBooking}>
-          Confirm Booking
-        </button>
+        <button onClick={handleBooking}>Confirm Booking</button>
       </div>
     );
   }
 
   return (
     <div className="container">
-      <h1>Flight Booking App</h1>
+      <h1>Welcome to Flight Booking App</h1>
 
-      <select
-        value={tripType}
-        onChange={(e) => setTripType(e.target.value)}
-      >
-        <option value="oneway">One Way</option>
-        <option value="roundtrip">Round Trip</option>
-      </select>
+      <div>
+        <label>
+          <input
+            type="radio"
+            name="trip"
+            value="oneway"
+            checked={tripType === "oneway"}
+            onChange={(e) => setTripType(e.target.value)}
+          />
+          One Way
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="trip"
+            value="roundtrip"
+            checked={tripType === "roundtrip"}
+            onChange={(e) => setTripType(e.target.value)}
+          />
+          Round Trip
+        </label>
+      </div>
 
       <input
         type="text"
@@ -162,22 +171,17 @@ function App() {
         onChange={(e) => setDate(e.target.value)}
       />
 
-      <button onClick={searchFlights}>
-        Search Flights
-      </button>
+      <button onClick={searchFlights}>Search Flights</button>
 
-      {searched && !flightFound && (
-        <p>No Flights Available</p>
-      )}
+      {searched && !flightFound && <p>No Flights Available</p>}
 
       {flightFound && (
         <div>
-          <h3>Flight Available</h3>
+          <ul>
+            <li>Phoenix Airlines - Mumbai to Delhi</li>
+          </ul>
 
-          <button
-            className="book-flight"
-            onClick={() => setShowBooking(true)}
-          >
+          <button className="book-flight" onClick={() => setBookingPage(true)}>
             Book Flight
           </button>
         </div>
