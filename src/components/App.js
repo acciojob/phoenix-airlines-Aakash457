@@ -173,12 +173,19 @@ function App() {
 
       <button onClick={searchFlights}>Search Flights</button>
 
-      {searched && !flightFound && <p>No Flights Available</p>}
+      {searched && !flightFound && (
+        <ul>
+          <li>No Flights Available</li>
+        </ul>
+      )}
 
       {flightFound && (
         <div>
           <ul>
-            <li>Phoenix Airlines - Mumbai to Delhi</li>
+            <li>Flight Name: Phoenix Airlines</li>
+            <li>Source: {source}</li>
+            <li>Destination: {destination}</li>
+            <li>Trip Type: {tripType}</li>
           </ul>
 
           <button className="book-flight" onClick={() => setBookingPage(true)}>
