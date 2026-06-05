@@ -1,10 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
-import bookingReducer from "./bookingSlice";
+import { createStore } from "redux";
+import bookingReducer from "./bookingReducer";
 
-const store = configureStore({
-  reducer: {
-    booking: bookingReducer,
-  },
-});
+const store = createStore(bookingReducer);
 
 export default store;

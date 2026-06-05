@@ -1,17 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-function Navbar() {
+export default function Navbar() {
   return (
-    <nav className="navbar">
-      <h2>Phoenix Airlines</h2>
-
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/flight-search">Search Flights</Link>
-      </div>
-    </nav>
+    <div style={{ background: "#3f51b5", color: "white", padding: "10px" }}>
+      <h2>Flight Booking App</h2>
+    </div>
   );
 }
-
-export default Navbar;
