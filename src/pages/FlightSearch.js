@@ -55,32 +55,48 @@ export default function FlightSearch() {
 
       <br />
 
-      <select
-        value={source}
-        onChange={(e) => setSource(e.target.value)}
-      >
-        <option value="">Select Source</option>
-        <option value="Mumbai">Mumbai</option>
-        <option value="Delhi">Delhi</option>
-        <option value="Bengaluru">Bengaluru</option>
-        <option value="Chennai">Chennai</option>
-      </select>
+      <div>
+        <input
+          type="text"
+          placeholder="Source"
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+        />
+
+        <select
+          value={source}
+          onChange={(e) => setSource(e.target.value)}
+        >
+          <option value="">Select Source</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Bengaluru">Bengaluru</option>
+          <option value="Chennai">Chennai</option>
+        </select>
+      </div>
 
       <br />
-      <br />
 
-      <select
-        value={destination}
-        onChange={(e) => setDestination(e.target.value)}
-      >
-        <option value="">Select Destination</option>
-        <option value="Mumbai">Mumbai</option>
-        <option value="Delhi">Delhi</option>
-        <option value="Bengaluru">Bengaluru</option>
-        <option value="Chennai">Chennai</option>
-      </select>
+      <div>
+        <input
+          type="text"
+          placeholder="Destination"
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+        />
 
-      <br />
+        <select
+          value={destination}
+          onChange={(e) => setDestination(e.target.value)}
+        >
+          <option value="">Select Destination</option>
+          <option value="Mumbai">Mumbai</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Bengaluru">Bengaluru</option>
+          <option value="Chennai">Chennai</option>
+        </select>
+      </div>
+
       <br />
 
       <input
