@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function Confirmation() {
   const data = useSelector((state) => state);
-  const navigate = useNavigate();
+  const history = useHistory();
 
   return (
     <div>
@@ -21,9 +21,7 @@ export default function Confirmation() {
       <p>Flight: {data.flight?.airline}</p>
       <p>Price: ₹{data.flight?.price}</p>
 
-      <br />
-
-      <button onClick={() => navigate("/")}>
+      <button onClick={() => history.push("/")}>
         BACK TO HOME
       </button>
     </div>

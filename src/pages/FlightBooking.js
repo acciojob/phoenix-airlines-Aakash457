@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function FlightBooking() {
   const [name, setName] = useState("");
@@ -10,7 +10,7 @@ export default function FlightBooking() {
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const validate = () => {
     if (!name || !email || !phone) {
@@ -27,6 +27,7 @@ export default function FlightBooking() {
 
   const handleSubmit = () => {
     const err = validate();
+
     if (err) {
       setError(err);
       return;
@@ -37,7 +38,7 @@ export default function FlightBooking() {
       payload: { name, email, phone }
     });
 
-    navigate("/confirmation");
+    history.push("/confirmation");
   };
 
   return (

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function FlightSearch() {
   const [tripType, setTripType] = useState("oneway");
@@ -9,7 +9,7 @@ export default function FlightSearch() {
   const [date, setDate] = useState("");
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const isValid = source && destination && date;
 
@@ -19,14 +19,13 @@ export default function FlightSearch() {
       payload: { tripType, source, destination, date }
     });
 
-    navigate("/flight-results");
+    history.push("/flight-results");
   };
 
   return (
     <div>
       <h2>Search Flights</h2>
 
-      {/* ✅ REQUIRED RADIO BUTTONS */}
       <label>
         <input
           type="radio"
@@ -49,7 +48,6 @@ export default function FlightSearch() {
 
       <br /><br />
 
-      {/* ✅ REQUIRED TEXT INPUTS */}
       <input
         type="text"
         placeholder="Source"

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "../pages/Home";
 import FlightSearch from "../pages/FlightSearch";
 import FlightResults from "../pages/FlightResults";
@@ -11,13 +11,14 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/flight-search" element={<FlightSearch />} />
-        <Route path="/flight-results" element={<FlightResults />} />
-        <Route path="/flight-booking" element={<FlightBooking />} />
-        <Route path="/confirmation" element={<Confirmation />} />
-      </Routes>
+
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/flight-search" component={FlightSearch} />
+        <Route path="/flight-results" component={FlightResults} />
+        <Route path="/flight-booking" component={FlightBooking} />
+        <Route path="/confirmation" component={Confirmation} />
+      </Switch>
     </BrowserRouter>
   );
 }

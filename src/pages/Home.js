@@ -1,14 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
 
 export default function Home() {
-  const navigate = useNavigate();
+  const history = useHistory();
 
   return (
     <div>
       <h1>Welcome to Flight Booking App</h1>
-      <button onClick={() => navigate("/flight-search")}>
+
+      <button onClick={() => history.push("/flight-search")}>
         SEARCH FLIGHTS HERE
       </button>
     </div>
