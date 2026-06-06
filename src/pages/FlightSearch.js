@@ -16,58 +16,86 @@ export default function FlightSearch() {
   const handleSearch = () => {
     dispatch({
       type: "SET_SEARCH",
-      payload: { tripType, source, destination, date }
+      payload: {
+        tripType,
+        source,
+        destination,
+        date,
+      },
     });
 
     history.push("/flight-results");
   };
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>Search Flights</h2>
 
-      <label>
-        <input
-          type="radio"
-          value="oneway"
-          checked={tripType === "oneway"}
-          onChange={(e) => setTripType(e.target.value)}
-        />
-        One Way
-      </label>
+      <div>
+        <label>
+          <input
+            type="radio"
+            value="oneway"
+            checked={tripType === "oneway"}
+            onChange={(e) => setTripType(e.target.value)}
+          />
+          One Way
+        </label>
 
-      <label>
-        <input
-          type="radio"
-          value="roundtrip"
-          checked={tripType === "roundtrip"}
-          onChange={(e) => setTripType(e.target.value)}
-        />
-        Round Trip
-      </label>
+        <label style={{ marginLeft: "20px" }}>
+          <input
+            type="radio"
+            value="roundtrip"
+            checked={tripType === "roundtrip"}
+            onChange={(e) => setTripType(e.target.value)}
+          />
+          Round Trip
+        </label>
+      </div>
 
-      <br /><br />
+      <br />
 
-      <input
-        type="text"
-        placeholder="Source"
+      <select
+        value={source}
         onChange={(e) => setSource(e.target.value)}
-      />
+      >
+        <option value="">Select Source</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Chennai">Chennai</option>
+      </select>
 
-      <input
-        type="text"
-        placeholder="Destination"
+      <br />
+      <br />
+
+      <select
+        value={destination}
         onChange={(e) => setDestination(e.target.value)}
-      />
+      >
+        <option value="">Select Destination</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Bengaluru">Bengaluru</option>
+        <option value="Chennai">Chennai</option>
+      </select>
+
+      <br />
+      <br />
 
       <input
         type="date"
+        value={date}
         onChange={(e) => setDate(e.target.value)}
       />
 
-      <br /><br />
+      <br />
+      <br />
 
-      <button onClick={handleSearch} disabled={!isValid}>
+      <button
+        onClick={handleSearch}
+        disabled={!isValid}
+      >
         SEARCH FLIGHT
       </button>
     </div>
